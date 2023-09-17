@@ -1,7 +1,6 @@
 from bs4 import BeautifulSoup
 import csv
 import pyperclip
-import time
 
 
 def main():
