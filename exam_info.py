@@ -12,6 +12,24 @@ def get_html(url):
     return soup
 
 
+def fetch_exam_date_from_applist(soup):
+    table = soup.find('table', {'id': 'APPLIST'})
+    if table:
+        first_row = table.find('tbody', {'class': 'tablecontent'}).find('tr')
+        if first_row:
+            date_field = first_row.find('td', {'class': 'app'})
+            if date_field:
+                return date_field.text.strip().split(' ')[-1]
+
+    exam_entry_date_field = soup.find(
+        'div', {'id': 'RWEV_REGISTRATION-field'})
+    if exam_entry_date_field:
+        return exam_entry_date_field.find(
+            'div', {'class': 'element'}).text.split('-')[1].strip().split(' ')[0] + ' (Anmeldung)'
+
+    return None
+
+
 def process_row(row, writer):
     module, title = row['Title'].split(' – ', maxsplit=1)
     ects = row['ECTS']
@@ -41,12 +59,7 @@ def process_row(row, writer):
             '../../', 'https://campus.kit.edu/sp/')
 
         exam_soup = get_html(scrape_exam_link)
-
-        exam_date_field = exam_soup.find(
-            'div', {'id': 'RWEV_REGISTRATION-field'})
-        if exam_date_field:
-            exam_date = exam_date_field.find(
-                'div', {'class': 'element'}).text.split('-')[1].strip().split(' ')[0]
+        exam_date = fetch_exam_date_from_applist(exam_soup)
 
     # Write to a new CSV
     writer.writerow({

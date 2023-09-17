@@ -27,9 +27,14 @@ def parse_date(date_str):
     return datetime.strptime(date_str, "%d.%m.%Y")
 
 
+def get_key(row):
+    date = parse_date(row.get('Exam Date', 'N/A').replace(' (Anmeldung)', ''))
+    return (row['Exam Type'], date)
+
+
 def sort_rows(rows):
     # Sort by 'Exam Type', and then by parsed 'Exam Date'
-    return sorted(rows, key=lambda x: (x['Exam Type'], parse_date(x.get('Exam Date', 'N/A'))))
+    return sorted(rows, key=lambda x: get_key(x))
 
 
 if __name__ == '__main__':
