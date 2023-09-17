@@ -105,3 +105,4 @@ Feel free to contribute or report any issues.
 - [ ] Always extract the exam registration date for exams
 - [ ] Parse the initial exam data less crudely from the HTML
 - [ ] Simpler interface which does all in one go and allows neater filtering and sorting
+- [ ] Add why there was no Exam information found
