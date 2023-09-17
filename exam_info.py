@@ -55,8 +55,8 @@ def process_row(row, writer):
         'ECTS': ects,
         'Exam Type': exam_type,
         'Exam Date': exam_date,
-        'Link to Modul': original_link,
-        'Link to Exam': exam_page_link
+        'Link to Modul': original_link.replace('../../', 'https://campus.studium.kit.edu/events/catalog.php#!'),
+        'Link to Exam': exam_page_link.replace('../../', 'https://campus.studium.kit.edu/events/catalog.php#!')
     })
 
 
