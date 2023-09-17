@@ -13,7 +13,7 @@ def get_html(url):
 
 
 def process_row(row, writer):
-    module, title = row['Title'].split(' – ')
+    module, title = row['Title'].split(' – ', maxsplit=1)
     ects = row['ECTS']
     original_link = row['Link']
 
