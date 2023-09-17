@@ -101,4 +101,7 @@ The sorted output will be saved in a file named `sorted_exam_info.csv`.
 ---
 
 Feel free to contribute or report any issues.
-Certainly, you can create an additional Python script named `order.py` to sort the rows in the `exam_info.csv` file. Below is the code for sorting the CSV based on 'Exam Type' and 'Exam Date'.
+
+- [ ] Always extract the exam registration date for exams
+- [ ] Parse the initial exam data less crudely from the HTML
+- [ ] Simpler interface which does all in one go and allows neater filtering and sorting
