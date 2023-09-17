@@ -72,13 +72,33 @@ The final output will be saved in a file named `exam_info.csv`.
 
 ---
 
+## Additional Utility: Sort Your Exams
+
+After generating the `exam_info.csv`, you may want to sort the data for easier consumption. You can use the `order.py` script for this.
+
+### Steps to Sort
+
+#### Step 4: Sort Exam Information
+
+Run the `order.py` script to sort the exams first by 'Exam Type' and then by 'Exam Date'.
+
+```bash
+python order.py
+```
+
+The sorted output will be saved in a file named `sorted_exam_info.csv`.
+
+---
+
 ## Files
 
 1. `scrape_exams.py` - Scrapes the initial exam data.
 2. `filter.py` - Filters the scraped exams based on specified criteria.
 3. `exam_info.py` - Fetches detailed exam information like type, date, etc.
-4. `requirements.txt` - Contains all the required Python packages.
+4. `order.py` - Sorts the exam information based on 'Exam Type' and 'Exam Date'.
+5. `requirements.txt` - Contains all the required Python packages.
 
 ---
 
 Feel free to contribute or report any issues.
+Certainly, you can create an additional Python script named `order.py` to sort the rows in the `exam_info.csv` file. Below is the code for sorting the CSV based on 'Exam Type' and 'Exam Date'.

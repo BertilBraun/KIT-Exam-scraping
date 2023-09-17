@@ -3,3 +3,4 @@ requests
 tqdm
 csv
 pyperclip
+pandas
