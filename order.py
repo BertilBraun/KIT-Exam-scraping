@@ -1,18 +1,38 @@
-import pandas as pd
+import csv
+from datetime import datetime
 
 
-def sort_csv(input_csv, output_csv):
-    df = pd.read_csv(input_csv)
+def read_csv(input_file):
+    rows = []
+    with open(input_file, 'r', encoding='utf-8') as infile:
+        reader = csv.DictReader(infile)
+        for row in reader:
+            rows.append(row)
+    return rows
 
-    # Convert 'Exam Date' column to datetime format for proper sorting
-    df['Exam Date'] = pd.to_datetime(df['Exam Date'], errors='coerce')
 
-    # Sort by 'Exam Type' and then 'Exam Date'
-    df.sort_values(['Exam Type', 'Exam Date'], inplace=True)
+def write_csv(output_file, rows):
+    with open(output_file, 'w', encoding='utf-8', newline='') as outfile:
+        fieldnames = ['Module', 'Title', 'ECTS', 'Exam Type',
+                      'Exam Date', 'Link to Modul', 'Link to Exam']
+        writer = csv.DictWriter(outfile, fieldnames=fieldnames)
+        writer.writeheader()
+        for row in rows:
+            writer.writerow(row)
 
-    # Save the sorted DataFrame back to CSV
-    df.to_csv(output_csv, index=False, encoding='utf-8')
+
+def parse_date(date_str):
+    if date_str == "N/A":
+        return None
+    return datetime.strptime(date_str, "%d.%m.%Y")
+
+
+def sort_rows(rows):
+    # Sort by 'Exam Type', and then by parsed 'Exam Date'
+    return sorted(rows, key=lambda x: (x['Exam Type'], parse_date(x.get('Exam Date', 'N/A'))))
 
 
 if __name__ == '__main__':
-    sort_csv('exam_info.csv', 'sorted_exam_info.csv')
+    rows = read_csv('exam_info.csv')
+    sorted_rows = sort_rows(rows)
+    write_csv('sorted_exam_info.csv', sorted_rows)
